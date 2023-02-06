@@ -1,0 +1,58 @@
+.fieldWrapper {
+  display: flex;
+  margin: 10px;
+  width: calc(100% - 20px);
+  position: relative;
+
+  .fieldWrapperContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .fieldWrapperHeader {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+
+    .fieldWrapperLabel {
+      width: fit-content;
+      margin-bottom: 4px;
+    }
+
+    .fieldWrapperButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .dragZone {
+    background: #eee;
+    border: 0;
+    height: 100%;
+    margin-right: 8px;
+    border-radius: 4px;
+    width: 24px;
+  }
+
+  .addNewField {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #42a5f5;
+    border: 0;
+    height: 100%;
+    margin-left: 8px;
+    border-radius: 4px;
+    width: 30px;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}

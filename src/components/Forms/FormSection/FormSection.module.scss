@@ -1,0 +1,18 @@
+.formSection {
+  border-radius: 0;
+  overflow: hidden;
+
+  .formSection__title {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #eeeeee;
+    padding: 10px;
+  }
+
+  .formSection__Body {
+    padding: 10px;
+  }
+}

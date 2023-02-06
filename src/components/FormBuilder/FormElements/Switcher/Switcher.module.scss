@@ -1,0 +1,20 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 24px;
+  border-radius: 12px;
+  position: relative;
+  transition: background 300ms ease-in-out;
+  cursor: pointer;
+  margin: 6px;
+
+  .indicator {
+    width: 16px;
+    height: 16px;
+    background: #eeeeee;
+    border-radius: 10px;
+    position: absolute;
+    transition: left 300ms ease-in-out;
+  }
+}

@@ -1,0 +1,18 @@
+.elementsListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .item {
+    height: 50px;
+    display: flex;
+    padding: 10px;
+    box-shadow: 0 0 4px #000000;
+    border-radius: 8px;
+
+    a {
+      color: #000000;
+      text-decoration: none;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  z-index: 10;
+  background: #eeeeee;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 20px;
+
+  .title {
+    display: flex;
+    gap: 6px;
+    font-size: 1.125em;
+    font-weight: 500;
+    margin-right: auto;
+    background: transparent;
+    border: 0;
+    width: min-content;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.content {
+  margin-top: 60px;
+}
