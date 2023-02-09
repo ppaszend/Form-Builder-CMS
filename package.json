@@ -1,6 +1,8 @@
 {
   "name": "form-builder-cms",
   "version": "0.1.0",
+  "description": "Front-End part of Form Builder",
+  "author": "Paweł Paszenda",
   "private": true,
   "scripts": {
     "dev": "next dev",

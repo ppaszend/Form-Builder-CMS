@@ -1,8 +1,8 @@
 # Form Builder
 
-Forms Builder is a web application for building customizable forms with no code skills required. It works by drag and drop from CMS panel.
+Form Builder is a web application for building customizable forms with no code skills required. It works by drag and drop from CMS panel.
 
-## Instalation
+## Installation
 ```bash
 npm install
 ```
@@ -16,7 +16,7 @@ npm run dev
 - Next.js (https://nextjs.org/docs)
 - React (https://reactjs.org)
 - MUI (https://mui.com)
-- TypeScript (https://www.typescriptlang.org/)
+- TypeScript (https://www.typescriptlang.org)
 
 ## Deploy on Vercel
 
