@@ -1,7 +1,6 @@
 import {FormModel} from "@/models/Form.model";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "@/store";
-import getFormById from "@/requests/forms/getFormById";
+import {AppState} from "@/store";
 
 interface FormState {
     value: FormModel | null;
@@ -23,6 +22,6 @@ export const formSlice = createSlice({
 
 export const { setForm } = formSlice.actions;
 
-export const selectForm = (state: RootState) => state.form.value;
+export const selectForm = (state: AppState) => state.form.value;
 
 export default formSlice.reducer;

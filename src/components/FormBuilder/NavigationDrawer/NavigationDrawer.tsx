@@ -1,14 +1,7 @@
-import styles from './NavigationDrawer.module.scss';
-import Link from "next/link";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faList} from "@fortawesome/free-solid-svg-icons";
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import {Box, MUIStyledCommonProps} from "@mui/system";
-import MenuIcon from '@mui/icons-material/menu';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import {MUIStyledCommonProps} from "@mui/system";
 import MuiDrawer from '@mui/material/Drawer';
 import {DetailedHTMLProps, HTMLAttributes, useState} from "react";
-import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import {
     CssBaseline,
@@ -18,18 +11,18 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    Typography
 } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import {StyledComponent} from "@emotion/styled";
+import Navbar from "@/components/FormBuilder/Navbar/Navbar";
+import {drawerWidth} from "@/helpers/constants";
+import {useRouter} from "next/router";
 
 interface NavigationDrawerProps {
     DrawerHeader: StyledComponent<MUIStyledCommonProps<Theme>, DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>
 }
-
-const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
     width: drawerWidth,
@@ -52,28 +45,6 @@ const closedMixin = (theme: Theme): CSSObject => ({
     },
 });
 
-interface AppBarProps extends MuiAppBarProps {
-    open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen
-        })
-    })
-}));
-
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         width: drawerWidth,
@@ -91,90 +62,62 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
+const menuElements = [
+    { title: 'Forms', href: '/forms/1', pathname: '/forms/[page]' },
+    { title: 'Themes', href: '/themes/1', pathname: '/themes/[page]' },
+];
+
 export default function NavigationDrawer({DrawerHeader}: NavigationDrawerProps) {
     const theme = useTheme();
     const [open, setOpen] = useState<boolean>(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    }
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    }
+    const [allowClose, setAllowClose] = useState<boolean>(false);
+    const router = useRouter();
 
     return <>
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
-            <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    edge="start"
-                    sx={{
-                        marginRight: 5,
-                        ...(open && { display: 'none' }),
-                    }}>
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    Mini variant drawer
-                </Typography>
-            </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-            <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                </IconButton>
-            </DrawerHeader>
-            <Divider />
+        <Navbar open={!allowClose || open} setOpen={setOpen} />
+        <Drawer variant="permanent" open={!allowClose || open}>
+            {allowClose && (<>
+                <DrawerHeader>
+                    <IconButton onClick={() => setOpen(false)}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+            </>)}
             <List>
-                {[{title: 'Forms', href: '/forms/1'}].map((item, index) => (
+                {menuElements.map((item) => (
                         <ListItem key={item.title} disablePadding sx={{ display: 'block' }}>
-                            <Link href={item.href}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
+                                    justifyContent: (!allowClose || open) ? 'initial' : 'center',
                                     px: 2.5,
+                                    color: '#000000',
                                 }}
+                                href={item.href}
+                                selected={item.pathname === router.pathname}
                             >
                                 <ListItemIcon
                                     sx={{
                                         minWidth: 0,
-                                        mr: open ? 3 : 'auto',
+                                        mr: (!allowClose || open) ? 3 : 'auto',
                                         justifyContent: 'center',
                                     }}
                                 >
                                     <InboxIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText
+                                    primary={item.title}
+                                    sx={{
+                                        opacity: (!allowClose || open) ? 1 : 0 ,
+                                        textDecoration: 'none',
+                                    }}
+                                />
                             </ListItemButton>
-                            </Link>
                         </ListItem>
                 ))}
             </List>
         </Drawer>
     </>;
-
-    return (<>
-        <div className={styles.navigationDrawerShadow}></div>
-        <aside className={styles.navigationDrawer}>
-            <div className={styles.head}>
-                Form Builder CMS
-            </div>
-            <div className={styles.body}>
-                <Link className={styles.link} href={`/forms/1`}>
-                    <FontAwesomeIcon icon={faList} width="20px" />
-                    <div className={styles.linkText}>Forms List</div>
-                </Link>
-                <Link className={styles.link} href={`/themes/1`}>
-                    <FontAwesomeIcon icon={faList} width="20px" />
-                    <div className={styles.linkText}>Themes List</div>
-                </Link>
-            </div>
-        </aside>
-    </>)
 }
