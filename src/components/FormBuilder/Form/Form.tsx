@@ -1,5 +1,6 @@
-import {Alert, Button, Card, CardContent, CircularProgress, Grid, TextField, Typography} from "@mui/material";
 import React, {FormEvent} from "react";
+
+import {Alert, CircularProgress, TextField, Typography, Button, Card, CardContent, Grid} from "@mui/material";
 import {green} from "@mui/material/colors";
 
 export interface FieldProps {
@@ -13,17 +14,18 @@ interface FormProps {
     onSubmit: (event: FormEvent<HTMLDivElement>) => void;
     title: string;
     fields: FieldProps[];
-    userData: object;
-    onUserDataChange: (userData: object) => void;
+    data: object;
+    onDataChange: (userData: object) => void;
     buttonLoading: boolean;
     error?: string | false | null;
     buttonText: string;
     children?: JSX.Element | JSX.Element[];
+    maxWidth?: number,
 }
 
 export default function Form(props: FormProps) {
     const fieldInputHandler = (name: string, value: string) => {
-        props.onUserDataChange({...props.userData, [name]: value});
+        props.onDataChange({...props.data, [name]: value});
     }
 
     const submitHandler = (event: FormEvent<HTMLDivElement>) => {
@@ -33,7 +35,7 @@ export default function Form(props: FormProps) {
 
     return (
         <Card
-            sx={{width: '100%', maxWidth: 500}}
+            sx={{width: '100%', maxWidth: props.maxWidth || 500}}
             variant="outlined"
             component="form"
             noValidate
@@ -58,6 +60,7 @@ export default function Form(props: FormProps) {
                                 type={field.type}
                                 fullWidth
                                 label={field.label}
+                                defaultValue={(props.data as any)[field.name]}
                                 onInput={($event: React.ChangeEvent<HTMLInputElement>) => fieldInputHandler(field.name, $event.target.value)}
                                 autoComplete={field.autoComplete || field.name}
                             />

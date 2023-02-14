@@ -1,6 +1,6 @@
-import styles from './ElementsList.module.scss';
 import {FormModel} from "@/models/Form.model";
-import Link from "@mui/material/Link";
+import MaterialLink from "@mui/material/Link";
+import Link from 'next/link';
 import {Grid, Pagination, Paper, Stack} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Box from '@mui/material/Box';
@@ -18,33 +18,27 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ElementsList(props: ElementsListProps) {
-    return (
-        <>
-
-
-            <Box>
-                <Stack spacing={2}>
-                    {props.forms.map((form) => (
-                        <Item key={form._id}>
-                            <Grid container>
-                                <Grid item>
-                                    <Link
-                                        href={`/forms/${form._id}`}
-                                        underline="none"
-                                        color="#000000"
-                                    >
+    return (<>
+        <Box>
+            <Stack spacing={2}>
+                {props.forms.map((form) => (
+                    <Item key={form._id}>
+                        <Grid container>
+                            <Grid item>
+                                <Link href={`/forms/${form._id}`}>
+                                    <MaterialLink underline="none" color="#000000">
                                         {form.name}
-                                    </Link>
-                                </Grid>
+                                    </MaterialLink>
+                                </Link>
                             </Grid>
-                        </Item>
-                    ))}
-                </Stack>
-            </Box>
+                        </Grid>
+                    </Item>
+                ))}
+            </Stack>
+        </Box>
 
-            <Box mt={5} display="flex" justifyContent="center">
-                <Pagination count={10} />
-            </Box>
-        </>
-    )
+        <Box mt={5} display="flex" justifyContent="center">
+            <Pagination count={10} />
+        </Box>
+    </>)
 }

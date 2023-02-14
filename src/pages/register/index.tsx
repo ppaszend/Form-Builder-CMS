@@ -10,6 +10,7 @@ import {RegisterForm as RegisterFormModel} from "@/models/RegisterForm.model";
 import {registerForm} from "@/helpers/formHelper";
 import {useRouter} from "next/router";
 import AlreadyLoggedInDialog from "@/components/FormBuilder/Dialogs/AlreadyLoggedInDialog/AlreadyLoggedInDialog";
+import Link from "next/link";
 
 const userDataInitialState = {
     email: '',
@@ -61,8 +62,8 @@ export default function Register() {
                 onSubmit={handleSubmit}
                 title="Create new account"
                 fields={registerForm}
-                userData={userData}
-                onUserDataChange={(userData) => setUserData(userData as SetStateAction<RegisterFormModel>)}
+                data={userData}
+                onDataChange={(userData) => setUserData(userData as SetStateAction<RegisterFormModel>)}
                 buttonLoading={loggingInProgress}
                 buttonText="Create Account"
                 // todo: error handling by "error" prop here
@@ -72,14 +73,11 @@ export default function Register() {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Button
-                        variant="outlined"
-                        size="large"
-                        fullWidth
-                        href="/login"
-                    >
-                        I have account
-                    </Button>
+                    <Link href="/login">
+                        <Button variant="outlined" size="large" fullWidth>
+                            I have account
+                        </Button>
+                    </Link>
                 </Grid>
             </Form>
         </Box>

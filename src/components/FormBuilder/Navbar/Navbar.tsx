@@ -13,7 +13,7 @@ import {selectUserState, setToken, setUser} from "@/stores/user";
 import {useRouter} from "next/router";
 import {Avatar} from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Link from "@mui/material/Link";
+import Link from 'next/link'
 
 interface NavbarProps {
     open: boolean;

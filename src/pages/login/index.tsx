@@ -8,6 +8,7 @@ import {selectUserState, setToken, setUser} from "@/stores/user";
 import {getToken, getUserData} from "@/helpers/auth";
 import {loginForm} from "@/helpers/formHelper";
 import AlreadyLoggedInDialog from "@/components/FormBuilder/Dialogs/AlreadyLoggedInDialog/AlreadyLoggedInDialog";
+import Link from "next/link";
 
 const initialUserCredentialsState = {
     email: '',
@@ -44,7 +45,7 @@ export default function Login() {
         if (!token) {
             setLoggingInProgress(false);
             setAuthorizationError('Credentials that you provided not match any user');
-            return null;
+            return;
         }
         dispatch(setToken(token));
 
@@ -52,38 +53,37 @@ export default function Login() {
         if (!user) {
             setLoggingInProgress(false);
             setAuthorizationError('There was an error, please try again');
-            return null;
+            return;
         }
         dispatch(setUser(user));
 
         await router.push('/forms/1');
     }
 
-    return (<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Form
-            onSubmit={handleSubmit}
-            title="Login to CMS panel"
-            fields={loginForm}
-            userData={userCredentials}
-            onUserDataChange={(userData) => setUserCredentials(userData as SetStateAction<UserCredentialsModel>)}
-            buttonLoading={loggingInProgress}
-            buttonText="Login"
-            error={authorizationError}
-        >
-            <Grid item xs={12}>
-                <Divider variant="fullWidth">or</Divider>
-            </Grid>
+    return (
+        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Form
+                onSubmit={handleSubmit}
+                title="Login to CMS panel"
+                fields={loginForm}
+                data={userCredentials}
+                onDataChange={(userData) => setUserCredentials(userData as SetStateAction<UserCredentialsModel>)}
+                buttonLoading={loggingInProgress}
+                buttonText="Login"
+                error={authorizationError}
+            >
+                <Grid item xs={12}>
+                    <Divider variant="fullWidth">or</Divider>
+                </Grid>
 
-            <Grid item xs={12}>
-                <Button
-                    variant="outlined"
-                    size="large"
-                    fullWidth
-                    href="/register"
-                >
-                    Create account
-                </Button>
-            </Grid>
-        </Form>
-    </Box>)
+                <Grid item xs={12}>
+                    <Link href="/register">
+                        <Button variant="outlined" size="large" fullWidth>
+                            Create account
+                        </Button>
+                    </Link>
+                </Grid>
+            </Form>
+        </Box>
+    )
 }

@@ -7,7 +7,6 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import Link from "@mui/material/Link";
 import resendActivationMail from "@/requests/auth/resendActivationMail";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -73,7 +72,7 @@ export default function ConfirmMailDialog(props: ConfirmMailDialogProps) {
                 <Typography gutterBottom>
                     We sent mail to your E-mail address{
                     props.email ?
-                        <> (<Link href={`https://${props.email.split('@')[1]}`} target="_blank">{props.email}</Link>)</> :
+                        <> (<a href={`https://${props.email.split('@')[1]}`} target="_blank" rel="noreferrer">{props.email}</a>)</> :
                         ''
                     }, please check your mail inbox and follow the instructions.
                     If you don&apos;t see mail, check spam folder or click button below to resend.

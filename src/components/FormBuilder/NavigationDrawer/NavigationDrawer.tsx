@@ -19,6 +19,7 @@ import {StyledComponent} from "@emotion/styled";
 import Navbar from "@/components/FormBuilder/Navbar/Navbar";
 import {drawerWidth} from "@/helpers/constants";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 interface NavigationDrawerProps {
     DrawerHeader: StyledComponent<MUIStyledCommonProps<Theme>, DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>
@@ -88,33 +89,34 @@ export default function NavigationDrawer({DrawerHeader}: NavigationDrawerProps) 
             <List>
                 {menuElements.map((item) => (
                         <ListItem key={item.title} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: (!allowClose || open) ? 'initial' : 'center',
-                                    px: 2.5,
-                                    color: '#000000',
-                                }}
-                                href={item.href}
-                                selected={item.pathname === router.pathname}
-                            >
-                                <ListItemIcon
+                            <Link href={item.href}>
+                                <ListItemButton
                                     sx={{
-                                        minWidth: 0,
-                                        mr: (!allowClose || open) ? 3 : 'auto',
-                                        justifyContent: 'center',
+                                        minHeight: 48,
+                                        justifyContent: (!allowClose || open) ? 'initial' : 'center',
+                                        px: 2.5,
+                                        color: '#000000',
                                     }}
+                                    selected={item.pathname === router.pathname}
                                 >
-                                    <InboxIcon />
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={item.title}
-                                    sx={{
-                                        opacity: (!allowClose || open) ? 1 : 0 ,
-                                        textDecoration: 'none',
-                                    }}
-                                />
-                            </ListItemButton>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: (!allowClose || open) ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        <InboxIcon />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={item.title}
+                                        sx={{
+                                            opacity: (!allowClose || open) ? 1 : 0 ,
+                                            textDecoration: 'none',
+                                        }}
+                                    />
+                                </ListItemButton>
+                            </Link>
                         </ListItem>
                 ))}
             </List>

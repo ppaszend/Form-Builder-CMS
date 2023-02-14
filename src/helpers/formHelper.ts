@@ -38,3 +38,30 @@ export const loginForm = [
         autoComplete: 'current-password',
     },
 ];
+
+export const userDataForm = [
+    {
+        name: 'email',
+        label: 'E-Mail',
+        type: 'email',
+        autoComplete: 'email',
+    },
+    {
+        name: 'fullName',
+        label: 'Full Name',
+        type: 'text',
+        autoComplete: 'name',
+    },
+    {
+        name: 'address',
+        label: 'Address',
+        type: 'text',
+        autoComplete: 'address',
+    },
+    {
+        name: 'city',
+        label: 'City',
+        type: 'text',
+        autoComplete: 'city',
+    },
+];

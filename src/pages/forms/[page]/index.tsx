@@ -3,7 +3,8 @@ import {FormModel} from "@/models/Form.model";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
-import Link from '@mui/material/Link';
+import MaterialLink from '@mui/material/Link';
+import Link from 'next/link'
 import {Button, Paper, Typography} from "@mui/material";
 
 const formsPerPage = 10;
@@ -19,7 +20,9 @@ const columns: GridColDef[] = [
         headerName: 'Form name',
         width: 240,
         renderCell: (params) => (
-            <Link href={`/form/${params.row._id}`}>{params.row.name}</Link>
+            <Link href={`/form/${params.row._id}`}>
+                <MaterialLink component="span">{params.row.name}</MaterialLink>
+            </Link>
         )
     },
 ];
