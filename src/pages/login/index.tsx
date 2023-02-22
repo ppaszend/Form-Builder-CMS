@@ -9,6 +9,7 @@ import {getToken, getUserData} from "@/helpers/auth";
 import {loginForm} from "@/helpers/formHelper";
 import AlreadyLoggedInDialog from "@/components/FormBuilder/Dialogs/AlreadyLoggedInDialog/AlreadyLoggedInDialog";
 import Link from "next/link";
+import {setLoadingValue} from "@/stores/loading";
 
 const initialUserCredentialsState = {
     email: '',
@@ -56,6 +57,7 @@ export default function Login() {
             return;
         }
         dispatch(setUser(user));
+        dispatch(setLoadingValue(true));
 
         await router.push('/forms/1');
     }

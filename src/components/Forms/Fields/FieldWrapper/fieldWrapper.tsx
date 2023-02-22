@@ -2,8 +2,6 @@ import styles from './FieldWrapper.module.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGripVertical, faPenToSquare, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {getSectionByPosition} from "@/helpers/getters";
-// import {useAppSelector} from "@/app/hooks";
-// import {selectForm} from "@/stores/form";
 
 interface FieldWrapperProps {
     label: string;
