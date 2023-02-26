@@ -8,6 +8,12 @@ npm install
 ```
 
 ## Usage (run the development server)
+
+Create .env file with filled following parameters
+```dotenv
+NEXT_PUBLIC_API_URL=
+```
+
 ```bash
 npm run dev
 ```

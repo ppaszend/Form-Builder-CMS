@@ -1,7 +1,7 @@
 import {FormModel} from "@/models/Form.model";
 
 export default async function getFormsList(skip?: number, limit?: number): Promise<FormModel[]> {
-    const url = new URL('http://localhost:3000/forms');
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/forms`);
     if (skip) url.searchParams.append("skip", skip.toString());
     if (limit) url.searchParams.append("limit", limit.toString());
 

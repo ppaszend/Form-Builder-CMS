@@ -7,6 +7,7 @@ import {Button, Paper, Typography} from "@mui/material";
 import {GetServerSideProps} from "next";
 import countAllForms from "@/requests/forms/countAllForms";
 import Head from "next/head";
+import Box from "@mui/material/Box";
 
 const formsPerPage = 10;
 
@@ -101,6 +102,12 @@ export default function Index({ pageProps }: { pageProps: FormsProps }) {
                 <title>Master Forms - Forms list - page {pageProps.page}</title>
             </Head>
             <div style={{height: '500px', width: '100%', maxWidth: '1000px', marginLeft: 'auto', marginRight: 'auto'}}>
+                <Box sx={{marginBottom: '20px', display: 'flex', justifyContent: 'flex-end'}}>
+                    <Link href="/forms/new">
+                        <Button variant="contained">Create new form</Button>
+                    </Link>
+                </Box>
+
                 <DataGrid
                     rows={pageProps.forms.map((form, id) => ({id: id + 1, name: form.name, _id: form._id}))}
                     columns={columns}
