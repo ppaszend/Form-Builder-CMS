@@ -11,8 +11,10 @@ npm install
 
 Create .env file with filled following parameters
 ```dotenv
-NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_API_URL= #place your API server address with protocol, for ex. http://127.0.0.1
 ```
+
+Then you can start the development server
 
 ```bash
 npm run dev
