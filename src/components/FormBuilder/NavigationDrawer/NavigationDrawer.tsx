@@ -2,7 +2,6 @@ import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import {MUIStyledCommonProps} from "@mui/system";
 import MuiDrawer from '@mui/material/Drawer';
 import {DetailedHTMLProps, HTMLAttributes, useState} from "react";
-import IconButton from "@mui/material/IconButton";
 import {
     CssBaseline,
     Divider,
@@ -12,6 +11,8 @@ import {
     ListItemIcon,
     ListItemText,
 } from "@mui/material";
+
+import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import InboxIcon from '@mui/icons-material/MoveToInbox'
@@ -77,7 +78,7 @@ export default function NavigationDrawer({DrawerHeader}: NavigationDrawerProps) 
     return <>
         <CssBaseline />
         <Navbar open={!allowClose || open} setOpen={setOpen} />
-        <Drawer variant="permanent" open={!allowClose || open}>
+        {<Drawer variant="permanent" open={!allowClose || open}>
             {allowClose && (<>
                 <DrawerHeader>
                     <IconButton onClick={() => setOpen(false)}>
@@ -120,6 +121,6 @@ export default function NavigationDrawer({DrawerHeader}: NavigationDrawerProps) 
                         </ListItem>
                 ))}
             </List>
-        </Drawer>
+        </Drawer>}
     </>;
 }
